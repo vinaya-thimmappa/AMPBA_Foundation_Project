@@ -61,8 +61,8 @@ streamlit run application.py
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone git@github.com:vinaya-thimmappa/AMPBA_Foundation_Project.git
+   cd AMPBA_Foundation_Project
    ```
 
 2. Create a virtual environment (optional but recommended):
@@ -116,5 +116,5 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 ---
 
 ## Contributors
-- **Project Owner:** [Your Name]
+- **Project Owner:** 
 - **Contributors:** Open for collaboration! Feel free to submit pull requests or issues.
