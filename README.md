@@ -74,7 +74,7 @@ streamlit run application.py
 
 3. Install required packages:
    ```bash
-   pip install -r versioned_requirements.txt
+   pip install -r requirements.txt
    ```
 
 4. Set up the MySQL database:
