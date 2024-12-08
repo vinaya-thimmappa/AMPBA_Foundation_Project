@@ -10,6 +10,8 @@ This project includes a complete workflow for predicting wheat prices using hist
 ---
 
 ## Project Files
+### 0. `Assume mysql is installed`
+brew install mysql or use windows installer to install 
 
 ### 1. `setup.sh`
 This Bash script automates database setup using MySQL. It performs the following tasks:
@@ -19,8 +21,8 @@ This Bash script automates database setup using MySQL. It performs the following
 
 #### **How to Run:**
 ```bash
-chmod +x setup.sh
-./setup.sh
+chmod +x scripts/setup.sh
+.scripts/setup.sh
 ```
 
 ---
