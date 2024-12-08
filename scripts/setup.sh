@@ -1,11 +1,19 @@
+ear
+:
 #!/bin/bash
 
 # Database credentials
 DB_NAME="food_data"
-DB_USER="root"
+DB_USER="ISB_FP"
 DB_PASS="PennePasta1224"
 
-# Drop Database if exists
+# Create a new MySQL user and grant privileges
+mysql -u root -e "DROP USER IF EXISTS '$DB_USER'@'localhost';"
+mysql -u root -e "CREATE USER '$DB_USER'@'localhost' IDENTIFIED BY '$DB_PASS';"
+mysql -u root -e "GRANT ALL PRIVILEGES ON *.* TO '$DB_USER'@'localhost' WITH GRANT OPTION;"
+mysql -u root -e "FLUSH PRIVILEGES;"
+
+# Drop the database if it exists
 ERRORMSG=$(mysql -u $DB_USER -p$DB_PASS -e "DROP DATABASE IF EXISTS $DB_NAME;" 2>&1)
 RESULT=$?
 
@@ -20,28 +28,13 @@ else
     fi
 fi
 
-# Create Database
-ERRORMSG=$(mysql -u $DB_USER -p$DB_PASS -e "CREATE DATABASE $DB_NAME;" 2>&1)
+# Create the database
+mysql -u $DB_USER -p$DB_PASS -e "CREATE DATABASE $DB_NAME;"
 RESULT=$?
 
 if [ $RESULT -eq 0 ]; then
-    echo "Created database \"$DB_NAME\""
+    echo "Database \"$DB_NAME\" created successfully"
 else
-    if [[ "$ERRORMSG" == *"database exists"* ]]; then
-        echo "Database \"$DB_NAME\" already exists"
-    else
-        echo "$ERRORMSG"
-        exit 1
-    fi
-fi
-
-# Grant Privileges to root
-ERRORMSG=$(mysql -u $DB_USER -p$DB_PASS -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'localhost'; FLUSH PRIVILEGES;" 2>&1)
-RESULT=$?
-
-if [ $RESULT -eq 0 ]; then
-    echo "Granted all privileges on \"$DB_NAME\" to user \"$DB_USER\""
-else
-    echo "$ERRORMSG"
+    echo "Failed to create database \"$DB_NAME\""
     exit 1
 fi
